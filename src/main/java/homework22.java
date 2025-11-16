@@ -19,10 +19,6 @@ public class homework22 {
     }
 
     void main() {
-        /*for (int i = 1; i < 11;i=i+2 ) {
-            System.out.println("4*"+i +"="  + (4*i));
-        }*/
-
 
         Scanner scanner = new Scanner(System.in);
 
@@ -66,6 +62,5 @@ public class homework22 {
 
         scanner.close();
         table(first_numb, second_numb, shag);
-
     }
 }
