@@ -1,37 +1,36 @@
 package main.java;
 
-class Transformer {
+interface Action {
+    void fire();
+    void charge();
+
+    default void run() {
+        System.out.println(" is running");
+    }
+}
+
+abstract class Transformer {
     protected String name;
 
     public Transformer(String name) {
         this.name = name;
     }
 
-    public void run() {
-        System.out.println(name + " is running");
-    }
-
-    public void fire() {
-        System.out.println(name + " is firing");
-    }
-
-    public void charge() {
-        System.out.println(name + " is charging");
-    }
-
     public String getName() {
         return name;
     }
+
+    public abstract void transform();
 }
 
-class Autobot extends Transformer {
+class Autobot extends Transformer implements Action {
     private final String teamName = "Autobots";
     private final String eyeColor = "синие";
     private boolean kindness;
 
     public Autobot(String name) {
         super(name);
-        this.kindness = true; // по умолчанию true
+        this.kindness = true;
     }
 
     public String getTeamName() {
@@ -46,17 +45,30 @@ class Autobot extends Transformer {
         return kindness;
     }
 
-    // Сеттер для kindness
     public void setKindness(boolean kindness) {
         this.kindness = kindness;
     }
 
-    // Метод трансформации
+    @Override
     public void transform() {
         System.out.println(name + " трансформируется в транспортное средство");
     }
 
-    // Метод для показа всех свойств
+    @Override
+    public void fire() {
+        System.out.println(name + " is firing");
+    }
+
+    @Override
+    public void charge() {
+        System.out.println(name + " is charging");
+    }
+
+    @Override
+    public void run() {
+        System.out.println(name + " is running");
+    }
+
     public void showProperties() {
         System.out.println("Имя: " + name);
         System.out.println("Команда: " + teamName);
@@ -65,15 +77,14 @@ class Autobot extends Transformer {
     }
 }
 
-// Дочерний класс Decepticon
-class Decepticon extends Transformer {
+class Decepticon extends Transformer implements Action {
     private final String teamName = "Decepticons";
     private final String eyeColor = "красные";
     private boolean kindness;
 
     public Decepticon(String name) {
         super(name);
-        this.kindness = false; // по умолчанию false
+        this.kindness = false;
     }
 
     public String getTeamName() {
@@ -92,8 +103,24 @@ class Decepticon extends Transformer {
         this.kindness = kindness;
     }
 
+    @Override
     public void transform() {
         System.out.println(name + " трансформируется в наземный и воздушный транспорт, оружие, технику");
+    }
+
+    @Override
+    public void fire() {
+        System.out.println(name + " is firing");
+    }
+
+    @Override
+    public void charge() {
+        System.out.println(name + " is charging");
+    }
+
+    @Override
+    public void run() {
+        System.out.println(name + " is running");
     }
 
     public void showProperties() {
@@ -104,7 +131,6 @@ class Decepticon extends Transformer {
     }
 }
 
-// Главный класс для демонстрации
 public class TransformersDemo {
     public static void main(String[] args) {
         Autobot optimus = new Autobot("Optimus Prime");
@@ -127,5 +153,12 @@ public class TransformersDemo {
 
         System.out.println("\n=== Decepticon Properties ===");
         megatron.showProperties();
+
+        System.out.println("\n=== Список трансформеров ===");
+        Transformer[] transformers = {optimus, megatron};
+
+        for (Transformer transformer : transformers) {
+            System.out.println(transformer.getName());
+        }
     }
 }
