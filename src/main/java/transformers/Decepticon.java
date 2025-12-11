@@ -1,6 +1,6 @@
 package main.java.transformers;
 
-class Decepticon extends Transformer {
+class Decepticon extends Transformer implements Action {
     private static final String TEAM_NAME = "Decepticons";
     private static final String EYE_COLOR = "красные";
     private boolean kindness;
@@ -32,8 +32,19 @@ class Decepticon extends Transformer {
         this.transformationForm = form;
     }
 
+    @Override
     public void transform() {
         System.out.println(name + " трансформируется в " + transformationForm);
+    }
+
+    @Override
+    public void fire() {
+        System.out.println(name + " is firing");
+    }
+
+    @Override
+    public void charge() {
+        System.out.println(name + " is charging");
     }
 
     public void showProperties() {

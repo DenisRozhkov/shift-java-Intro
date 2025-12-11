@@ -1,6 +1,7 @@
 package main.java.transformers;
 
-class Autobot extends Transformer {
+
+class Autobot extends Transformer implements Action {
     private static final String TEAM_NAME = "Autobots";
     private static final String EYE_COLOR = "синие";
     private boolean kindness;
@@ -26,8 +27,19 @@ class Autobot extends Transformer {
         this.kindness = kindness;
     }
 
+    @Override
     public void transform() {
         System.out.println(name + " трансформируется в транспортное средство");
+    }
+
+    @Override
+    public void fire() {
+        System.out.println(name + " is firing");
+    }
+
+    @Override
+    public void charge() {
+        System.out.println(name + " is charging");
     }
 
     public void showProperties() {
